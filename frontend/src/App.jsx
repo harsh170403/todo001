@@ -6,25 +6,25 @@ function App() {
     const [newTodo, setNewTodo] = useState("");
 
     const fetchTodos = async () => {
-        const response = await axios.get('http://127.0.0.1:5000/todos');
+        const response = await axios.get('http://65.0.6.65:5000/todos');
         setTodos(response.data);
     };
 
     const addTodo = async () => {
         if (newTodo.trim()) {
-            await axios.post('http://127.0.0.1:5000/todos', { title: newTodo });
+            await axios.post('http://65.0.6.65:5000/todos', { title: newTodo });
             setNewTodo("");
             fetchTodos();
         }
     };
 
     const toggleTodo = async (id, completed) => {
-        await axios.put(`http://127.0.0.1:5000/todos/${id}`, { completed: !completed });
+        await axios.put(`http://65.0.6.65:5000/todos/${id}`, { completed: !completed });
         fetchTodos();
     };
 
     const deleteTodo = async (id) => {
-        await axios.delete(`http://127.0.0.1:5000/todos/${id}`);
+        await axios.delete(`http://65.0.6.65:5000/todos/${id}`);
         fetchTodos();
     };
 
