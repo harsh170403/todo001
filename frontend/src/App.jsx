@@ -1,31 +1,49 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+const BASE_URL = 'http://13.201.76.245:5000';
+
 function App() {
     const [todos, setTodos] = useState([]);
     const [newTodo, setNewTodo] = useState("");
 
     const fetchTodos = async () => {
-        const response = await axios.get('http://13.201.76.245todos');
-        setTodos(response.data);
+        try {
+            const response = await axios.get(`${BASE_URL}/todos`);
+            setTodos(response.data);
+        } catch (error) {
+            console.error("Error fetching todos:", error);
+        }
     };
 
     const addTodo = async () => {
         if (newTodo.trim()) {
-            await axios.post('http://13.201.76.245:5000/todos', { title: newTodo });
-            setNewTodo("");
-            fetchTodos();
+            try {
+                await axios.post(`${BASE_URL}/todos`, { title: newTodo });
+                setNewTodo("");
+                fetchTodos();
+            } catch (error) {
+                console.error("Error adding todo:", error);
+            }
         }
     };
 
     const toggleTodo = async (id, completed) => {
-        await axios.put(`http://13.201.76.245:5000/todos/${id}`, { completed: !completed });
-        fetchTodos();
+        try {
+            await axios.put(`${BASE_URL}/todos/${id}`, { completed: !completed });
+            fetchTodos();
+        } catch (error) {
+            console.error("Error toggling todo:", error);
+        }
     };
 
     const deleteTodo = async (id) => {
-        await axios.delete(`http://13.201.76.245:5000/todos/${id}`);
-        fetchTodos();
+        try {
+            await axios.delete(`${BASE_URL}/todos/${id}`);
+            fetchTodos();
+        } catch (error) {
+            console.error("Error deleting todo:", error);
+        }
     };
 
     useEffect(() => {
