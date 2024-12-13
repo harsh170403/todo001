@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const BASE_URL = 'http://13.201.76.245:5000';
+const BASE_URL = 'http://13.234.71.144:5000';
 
 function App() {
     const [todos, setTodos] = useState([]);
